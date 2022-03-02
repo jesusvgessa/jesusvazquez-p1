@@ -1,0 +1,67 @@
+<%- include('template/cabecera', {tituloWeb: 'Detalles de la medalla'}) %>
+    <div class="container">
+        <% if (error) { %>
+            <%= mensaje %>
+                <a href="/medallas" class="btn btn-dark btn-block my-2">Volver</a>
+                <% } %>
+                    <% if (!error) { %>
+                        <form id="editar" data-id="<%= medalla.id %>">
+                            <input type="text" value="<%= medalla.nombre %>" class="form-control my-2" name="nombre" id="nombreInput">
+                            <input type="text" value="<%= medalla.lider %>" class="form-control my-2" name="tipo" id="tipoInput">
+                            <button class="btn btn-warning btn-sm" type="submit">
+              Editar
+          </button>
+                        </form>
+                        <hr>
+                        <button class="btn btn-danger btn-sm" data-id="<%= medalla.id %>">
+          Eliminar
+      </button>
+                        <% } %>
+    </div>
+    <%- include('template/footer') %>
+        <script>
+            const btnEliminar = document.querySelector('.btn-danger')
+            btnEliminar.addEventListener('click', async() => {
+                console.log(btnEliminar.dataset.id)
+                try {
+                    // https://developer.mozilla.org/es/docs/Web/API/HTMLElement/dataset
+                    const data = await fetch(`/medallas/${btnEliminar.dataset.id}`, {
+                        method: 'delete'
+                    })
+                    const res = await data.json()
+                    console.log(res)
+                    if (res.estado) {
+                        window.location.href = '/medallas'
+                    } else {
+                        console.log(res)
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
+            })
+
+            const formEditar = document.querySelector('#editar');
+            formEditar.addEventListener('submit', async(e) => {
+                e.preventDefault()
+                const nombre = formEditar.elements['nombre'].value
+                const tipo = formEditar.elements['lider'].value
+                const id = formEditar.dataset.id
+                const data = await fetch(`/medallas/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nombre,
+                        tipo,
+                        descripcion
+                    })
+                })
+                const res = await data.json()
+                if (res.estado) {
+                    window.location.href = '/medallas'
+                } else {
+                    console.log(res)
+                }
+            })
+        </script>

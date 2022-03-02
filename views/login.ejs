@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.0.2 -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/signin.css">
+</head>
+
+<body>
+    <main class="form-signin">
+        <form action="/" method="POST">
+            <img class="mb-4 mx-auto" src="/img/pokebola.png" alt="" width="72">
+            <h1 class="h3 mb-3 fw-normal">Inicia sesión</h1>
+
+            <div class="form-floating">
+                <input type="name" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Usuario</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Contraseña</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+            <a href="/">Volver</a>
+        </form>
+    </main>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <!-- <script>
+        const btnSesion = document.querySelector('.btn-primary')
+        btnSesion.addEventListener('click', async() => {
+            console.log(btnSesion.dataset.id)
+            try {
+                // https://developer.mozilla.org/es/docs/Web/API/HTMLElement/dataset
+                const data = await fetch(`/medallas/${btnEliminar.dataset.id}`, {
+                    method: 'delete'
+                })
+                const res = await data.json()
+                console.log(res)
+                if (res.estado) {
+                    window.location.href = '/medallas'
+                } else {
+                    console.log(res)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        })
+
+        const formEditar = document.querySelector('#editar');
+        formEditar.addEventListener('submit', async(e) => {
+            e.preventDefault()
+            const nombre = formEditar.elements['nombre'].value
+            const tipo = formEditar.elements['lider'].value
+            const id = formEditar.dataset.id
+            const data = await fetch(`/medallas/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre,
+                    tipo,
+                    descripcion
+                })
+            })
+            const res = await data.json()
+            if (res.estado) {
+                window.location.href = '/medallas'
+            } else {
+                console.log(res)
+            }
+        })
+    </script> -->
+</body>
+
+</html>
